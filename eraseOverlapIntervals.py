@@ -37,6 +37,6 @@ def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
   return count
   
 '''
-Time complexity = O(n)
+Time complexity = O(nlogn)
 Space complexity  = O(1)
 '''
