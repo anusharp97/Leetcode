@@ -28,8 +28,7 @@ Note:
 The number of keys in all rooms combined is at most 3000.
 '''
 
-def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
-  n = len(rooms)
+n = len(rooms)
   visited = [0] * n
   stack = []
   stack.append((rooms[0],0))
@@ -44,8 +43,9 @@ def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
       return False
   else:
       return True
+
       
 '''
 Time complexity: O(n+e) where n is the number of rooms and e is number of keys
-Space complexity: O(n) where n is the number of rooms for stack and visited
+Space complexity: O(n) where n is the number of rooms
 '''
