@@ -15,7 +15,7 @@ Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 '''
 def merge(self, intervals: List[List[int]]) -> List[List[int]]:
   intervals.sort(key=lambda x:x[0])
-  # sort the intervals by their start value, then each set of intervals that can be merged will appear as a contiguous "run" in the sorted list.
+  print(intervals)
   res = []
   n = len(intervals)
   if n<=1:
@@ -23,41 +23,16 @@ def merge(self, intervals: List[List[int]]) -> List[List[int]]:
   start = intervals[0][0]
   end = intervals[0][1]
   for i in range(1,n):
-      curStart = intervals[i][0]
-      curEnd = intervals[i][1]
-      if curStart<=end:
-          end = max(curEnd,end)
-      else:
+      interval = intervals[i]
+      if interval[0]>end:
           res.append([start,end])
-          start = curStart
-          end = curEnd
-  if [start,end] not in res:
-      res.append([start,end])
+          start = interval[0]
+          end = interval[1]
+      else:
+          end = max(end,interval[1])
+          start = min(start, interval[0])
+  res.append([start,end])
   return res
-  #   if not intervals:
-#       return
-#   intervals.sort(key = lambda x: x[0])
-#   n = len(intervals)
-#   prevStart, prevEnd = intervals[0][0], intervals[0][1]
-#   res = {}
-#   res[prevStart] = prevEnd
-#   for i in range(1,n):
-#       curStart, curEnd = intervals[i][0], intervals[i][1]
-#       # if the current interval begins before the end of previous interval
-#       # we merge them by updating the end of the previous interval if it is less than the end of the current interval.
-#       if prevEnd >= curStart:
-#           if curEnd > prevEnd:
-#               res[prevStart] = curEnd
-#               prevEnd = curEnd
-#       else:
-#       # If the current interval begins after the previous interval ends, then they do not overlap
-#           res[curStart] = curEnd
-#           prevStart = curStart
-#           prevEnd = curEnd
-#   result = []
-#   for key,val in res.items():
-#       result.append([key,val])
-#   return result
   
   '''
   Time complexity = O(nlogn)
